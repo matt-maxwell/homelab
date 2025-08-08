@@ -28,5 +28,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/config/homelab
+  path: ./infrastructure/configs/homelab
   prune: true
