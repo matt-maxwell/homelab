@@ -1,0 +1,131 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: ">=61.0.0 <62.0.0"  # Pin to major version, allow minor updates
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      interval: 15m
+#  install:
+#    createNamespace: true
+#    remediation:
+#      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    global:
+      rbac:
+        create: true
+        pspEnabled: false
+    
+
+    prometheus:
+      prometheusSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "longhorn"
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
+        retention: 30d
+        retentionSize: 7GB
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 1000m
+          limits:
+            memory: 4Gi
+            cpu: 2000m
+
+        remoteWrite:
+          - url: http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push
+            writeRelabelConfigs:
+              - sourceLabels: [__name__]
+                regex: "up|prometheus_notifications_total|prometheus_notifications_dropped_total"
+                action: keep
+    
+
+    grafana:
+      enabled: true
+      admin:
+        existingSecret: grafana-admin-secret
+        userKey: admin-user
+        passwordKey: admin-password
+      env:
+        GF_SECURITY_ADMIN_USER:
+          valueFrom:
+            secretKeyRef:
+              name: grafana-admin-secret
+              key: admin-user
+        GF_SECURITY_ADMIN_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: grafana-admin-secret
+              key: admin-password
+      persistence:
+        enabled: true
+        storageClassName: "longhorn"
+        size: 5Gi
+      resources:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 500m
+
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          url: http://loki-gateway.monitoring.svc.cluster.local
+          access: proxy
+          isDefault: false
+    
+
+    alertmanager:
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "longhorn"
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 5Gi
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 500m
+    
+    nodeExporter:
+      enabled: true
+    
+    kubeStateMetrics:
+      enabled: true
+    
+    prometheusOperator:
+      resources:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 500m
