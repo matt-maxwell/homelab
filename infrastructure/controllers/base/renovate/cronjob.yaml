@@ -15,8 +15,6 @@ spec:
           containers:
             - name: renovate
               image: renovate/renovate:latest
-              args:
-                - matt-maxwell/homelab
               envFrom:
                 - secretRef:
                     name: renovate-container-env
