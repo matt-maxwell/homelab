@@ -4,5 +4,7 @@
     "fileMatch": [
       "\\.yaml$"
     ]
-  }
+  },
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dependency Dashboard"
 }
