@@ -4,3 +4,4 @@ resources:
   - cronjob.yaml
   - namespace.yaml
   - secrets.yaml
+  - configmap.yaml
