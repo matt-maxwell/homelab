@@ -2,87 +2,30 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
-  namespace: monitoring
 spec:
-  releaseName: kube-prometheus-stack
-  interval: 5m
-  timeout: 10m0s
+  interval: 30m
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 65.5.0 # Lock version
+      version: "68.x"
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
-        namespace: flux-system
-  values:
-    defaultRules:
-      create: true
-      rules: 
-        etcd: false
-    prometheus:
-      prometheusSpec:
-        retention: 7d
-        scrapeInterval: 60s
-        evaluationInterval: 60s
-        replicas: 1
-        resources:
-          requests:
-            cpu: 200m
-            memory: 512Mi
-          limits:
-            cpu: 500m
-            memory: 1Gi
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: longhorn
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 5Gi
-        enableAdminAPI: false
-    alertmanager:
-      alertmanagerSpec:
-        replicas: 1
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            cpu: 200m
-            memory: 256Mi
-    grafana:
-      persistence:
-        enabled: true
-        storageClassName: longhorn
-        size: 5Gi
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          cpu: 300m
-          memory: 512Mi
-      additionalDataSources:
-        - name: Loki
-          type: loki
-          url: http://loki.monitoring:3100
-          access: proxy
-          isDefault: false
-    kube-state-metrics:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 128Mi
-        limits:
-          cpu: 200m
-          memory: 256Mi
-    nodeExporter:
-      resources:
-        requests:
-          cpu: 20m
-          memory: 32Mi
-        limits:
-          cpu: 100m
-          memory: 128Mi
+        name: kube-prometheus-stack
+        namespace: monitoring
+      interval: 12h
+
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-prometheus-stack-values
+
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  driftDetection:
+    mode: enabled
+    ignore:
+      # Ignore "validated" annotation which is not inserted during install
+      - paths: ["/metadata/annotations/prometheus-operator-validated"]
+        target:
+          kind: PrometheusRule
