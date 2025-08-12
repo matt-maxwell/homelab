@@ -4,38 +4,25 @@ metadata:
   name: promtail
   namespace: monitoring
 spec:
-  interval: 15m
+  releaseName: promtail
+  interval: 5m
   chart:
     spec:
       chart: promtail
-      version: ">=6.0.0 <7.0.0"
+      version: 6.15.5 # choose a stable version
       sourceRef:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      interval: 15m
-#  install:
-#    createNamespace: true
-#    remediation:
-#      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
   values:
     config:
       clients:
-        - url: http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push
+        - url: http://loki.monitoring:3100/loki/api/v1/push
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 128Mi
       limits:
-        cpu: 500m
-        memory: 512Mi
-    tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
-        effect: NoSchedule
+        cpu: 200m
+        memory: 256Mi
+

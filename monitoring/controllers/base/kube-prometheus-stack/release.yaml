@@ -4,117 +4,85 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  interval: 15m
+  releaseName: kube-prometheus-stack
+  interval: 5m
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: ">=61.0.0 <62.0.0"  # Pin to major version, allow minor updates
+      version: 65.5.0 # Lock version
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-      interval: 15m
-#  install:
-#    createNamespace: true
-#    remediation:
-#      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
   values:
-
-    global:
-      rbac:
-        create: true
-        pspEnabled: false
-    
-
+    defaultRules:
+      create: true
+      rules: 
+        etcd: false
     prometheus:
       prometheusSpec:
+        retention: 7d
+        scrapeInterval: 60s
+        evaluationInterval: 60s
+        replicas: 1
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn"
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 10Gi
-        retention: 30d
-        retentionSize: 7GB
-        resources:
-          requests:
-            memory: 1Gi
-            cpu: 1000m
-          limits:
-            memory: 2Gi
-            cpu: 2000m
-
-        remoteWrite:
-          - url: http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push
-            writeRelabelConfigs:
-              - sourceLabels: [__name__]
-                regex: "up|prometheus_notifications_total|prometheus_notifications_dropped_total"
-                action: keep
-    
-
-    grafana:
-      enabled: true
-      admin:
-        existingSecret: grafana-admin-secret
-        userKey: admin-user
-        passwordKey: admin-password
-      persistence:
-        enabled: true
-        storageClassName: "longhorn"
-        size: 5Gi
-      resources:
-        requests:
-          memory: 512Mi
-          cpu: 100m
-        limits:
-          memory: 1Gi
-          cpu: 500m
-
-      additionalDataSources:
-        - name: Loki
-          type: loki
-          url: http://loki-gateway.monitoring.svc.cluster.local
-          access: proxy
-          isDefault: false
-    
-
-    alertmanager:
-      alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "longhorn"
+              storageClassName: longhorn
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
                   storage: 5Gi
+        enableAdminAPI: false
+    alertmanager:
+      alertmanagerSpec:
+        replicas: 1
         resources:
           requests:
-            memory: 512Mi
-            cpu: 100m
+            cpu: 50m
+            memory: 64Mi
           limits:
-            memory: 1Gi
-            cpu: 500m
-    
-    nodeExporter:
-      enabled: true
-    
-    kubeStateMetrics:
-      enabled: true
-    
-    prometheusOperator:
+            cpu: 200m
+            memory: 256Mi
+    grafana:
+      envFromSecret: grafana-admin-secret
+      persistence:
+        enabled: true
+        storageClassName: longhorn
+        size: 5Gi
       resources:
         requests:
-          memory: 128Mi
           cpu: 100m
+          memory: 256Mi
         limits:
+          cpu: 300m
           memory: 512Mi
-          cpu: 500m
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          url: http://loki.monitoring:3100
+          access: proxy
+          isDefault: false
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+    nodeExporter:
+      resources:
+        requests:
+          cpu: 20m
+          memory: 32Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
