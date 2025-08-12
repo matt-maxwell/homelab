@@ -22,6 +22,11 @@ spec:
         enabled: true
         storageClassName: longhorn
         size: 5Gi
+    loki:
+      commonConfig:
+        storage:
+          filesystem:
+            directory: /data/loki
     limits_config:
       ingestion_rate: 4MB
       ingestion_burst_size: 6MB

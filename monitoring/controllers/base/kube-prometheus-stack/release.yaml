@@ -6,6 +6,7 @@ metadata:
 spec:
   releaseName: kube-prometheus-stack
   interval: 5m
+  timeout: 10m0s
   chart:
     spec:
       chart: kube-prometheus-stack
