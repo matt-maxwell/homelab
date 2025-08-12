@@ -53,17 +53,6 @@ spec:
             cpu: 200m
             memory: 256Mi
     grafana:
-      env:
-      - name: GF_SECURITY_ADMIN_USER
-        valueFrom:
-          secretKeyRef:
-            name: grafana-admin-secret
-            key: admin-user
-      - name: GF_SECURITY_ADMIN_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: grafana-admin-secret
-            key: admin-password
       persistence:
         enabled: true
         storageClassName: longhorn
