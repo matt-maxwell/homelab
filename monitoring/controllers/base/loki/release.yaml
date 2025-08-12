@@ -4,47 +4,50 @@ metadata:
   name: loki
   namespace: monitoring
 spec:
-  releaseName: loki
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       chart: loki
-      version: 6.6.2
+      version: "6.10.0"
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: flux-system
+        namespace: monitoring
+      interval: 12h
   values:
     deploymentMode: SingleBinary
-    singleBinary:
-      replicas: 1
-      persistence:
-        enabled: true
-        storageClassName: longhorn
-        size: 5Gi
+    loki:
+      auth_enabled: false
+      commonConfig:
+        replication_factor: 1
       storage:
-        type: filesystem
-        filesystem:
-          chunks_directory: /var/loki/chunks
-          rules_directory: /var/loki/rules
+        type: "filesystem"
       schemaConfig:
         configs:
-          - from: 2024-04-01
+          - from: "2024-01-01"
             store: tsdb
-            object_store: filesystem
-            schema: v13
             index:
               prefix: loki_index_
               period: 24h
-      limits_config:
-        retention_period: 7d
-        ingestion_rate: 4MB
-        ingestion_burst_size: 6MB
-        max_cache_freshness_per_query: 10m
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          cpu: 300m
-          memory: 512Mi
+            object_store: filesystem # we're storing on filesystem so there's no real persistence here.
+            schema: v13
+    singleBinary:
+      replicas: 1
+    read:
+      replicas: 0
+    backend:
+      replicas: 0
+    write:
+      replicas: 0
+    monitoring:
+      selfMonitoring:
+        enabled: true
+        grafanaAgent:
+          installOperator: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 300m
+        memory: 512Mi
