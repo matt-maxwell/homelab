@@ -11,7 +11,7 @@ spec:
       version: "68.x"
       sourceRef:
         kind: HelmRepository
-        name: kube-prometheus-stack
+        name: prometheus-community
         namespace: monitoring
       interval: 12h
 
