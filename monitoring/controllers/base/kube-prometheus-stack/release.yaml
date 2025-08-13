@@ -49,9 +49,19 @@ spec:
 
       envFromSecret: grafana-env
 
+      admin:
+        exisitingSecret:
+        userKey: admin-user
+        passwordKey: admin-password
+
       persistence:
         enabled: true
-        existingClaim: kube-prometheus-stack-grafana
+        type: pvc
+        accessModes:
+          - ReadWriteOnce
+        size: 5Gi
+        lookupVolumeName: true
+
 
   install:
     crds: Create

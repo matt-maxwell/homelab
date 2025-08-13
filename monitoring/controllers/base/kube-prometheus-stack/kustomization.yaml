@@ -5,6 +5,7 @@ resources:
   - repository.yaml
   - secrets.yaml
   - release.yaml
+  - env.yaml
 
 configurations:
   - kustomizeconfig.yaml
