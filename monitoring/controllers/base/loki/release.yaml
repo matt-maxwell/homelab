@@ -43,7 +43,7 @@ spec:
       selfMonitoring:
         enabled: true
         grafanaAgent:
-          installOperator: false
+          installOperator: true
     resources:
       requests:
         cpu: 100m

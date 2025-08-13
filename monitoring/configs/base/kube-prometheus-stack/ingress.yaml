@@ -39,7 +39,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kube-prometheus-stack-grafana
+                name: kube-prometheus-stack-prometheus
                 port:
                   number: 9093
   tls:
