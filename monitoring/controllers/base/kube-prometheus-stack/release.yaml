@@ -14,10 +14,43 @@ spec:
         name: prometheus-community
         namespace: flux-system
       interval: 12h
+  values:
+    kubeControllerManager:
+      service:
+        selector:
+          k8s-app: kube-controller-manager
+    kubeScheduler:
+      service:
+        selector:
+          k8s-app: kube-scheduler
 
-  valuesFrom:
-    - kind: ConfigMap
-      name: kube-prometheus-stack-values
+    alertmanager:
+      enabled: false
+
+    prometheus:
+      prometheusSpec:
+        podMonitorNamespaceSelector:
+          matchLabels:
+            app.kubernetes.io/component: monitoring
+
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+
+    grafana:
+      grafana.ini:
+        date_formats:
+          default_week_start: monday
+
+      envFromSecret: grafana-env
+
+      persistence:
+        enabled: true
+        type: pvc
+        accessModes:
+          - ReadWriteOnce
+        size: 4Gi  
 
   install:
     crds: Create
