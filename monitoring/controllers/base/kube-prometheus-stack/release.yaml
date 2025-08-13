@@ -47,10 +47,7 @@ spec:
 
       persistence:
         enabled: true
-        type: pvc
-        accessModes:
-          - ReadWriteOnce
-        size: 4Gi  
+        existingClaim: kube-prometheus-stack-grafana
 
   install:
     crds: Create
