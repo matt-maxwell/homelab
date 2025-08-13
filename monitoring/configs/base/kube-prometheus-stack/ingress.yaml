@@ -1,0 +1,72 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  rules:
+    - host: grafana.k8s.local.guatalupe.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - grafana.k8s.local.guatalupe.com
+      secretName: grafana-web-ui-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  rules:
+    - host: prometheus.k8s.local.guatalupe.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 9093
+  tls:
+    - hosts:
+        - prometheus.k8s.local.guatalupe.com
+      secretName: grafana-web-ui-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  rules:
+    - host: loki.k8s.local.guatalupe.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 3100
+  tls:
+    - hosts:
+        - loki.k8s.local.guatalupe.com
+      secretName: grafana-web-ui-tls
