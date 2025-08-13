@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: promtail
-      version: 6.15.5 # choose a stable version
+      version: 6.17.0 # choose a stable version
       sourceRef:
         kind: HelmRepository
         name: grafana
