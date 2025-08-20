@@ -12,6 +12,8 @@ metadata:
     gethomepage.dev/icon: grafana.png 
     gethomepage.dev/name: Grafana
     gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: grafana
+    gethomepage.dev/widget.url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local
 spec:
   rules:
     - host: grafana.k8s.local.guatalupe.com
