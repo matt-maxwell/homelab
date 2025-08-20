@@ -9,7 +9,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
     gethomepage.dev/description: Homelab Dashboard
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/group: Cluster Management
+    gethomepage.dev/group: Cluster Dashboards
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
 spec:
