@@ -24,3 +24,7 @@ spec:
                 name: homepage
                 port:
                   number: 3000
+  tls:
+    - hosts:
+        - "homepage.k8s.local.guatalupe.com"
+      secretName: homepage-web-ui-tls
