@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   key: pihole-api-key
                   name: homepage-secrets
+            - name: HOMEPAGE_VAR_PLEX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: plex-device-token
+                  name: homepage-secrets
           ports:
             - name: http
               containerPort: 3000

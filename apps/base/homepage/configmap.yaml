@@ -33,15 +33,16 @@ data:
                 version: 6
                 key: {{HOMEPAGE_VAR_PIHOLE_API_KEY}}
 
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
+    - Media:
+        - Plex:
+            href: https://plex.local.guatalupe.com
+            icon: sh-plex.png
+            description: Plex media server
+            widget:
+              - type: plex
+                url: https://plex.local.guatalupe.com
+                key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
 
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
   widgets.yaml: |
     - kubernetes:
         cluster:
