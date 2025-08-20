@@ -80,11 +80,19 @@ data:
         memory: true
         network: default
     - search:
-        provider: duckduckgo
+        provider: google
+        focus: true
+        showSearchSuggestions: true
         target: _blank
     - longhorn:
         expanded: true
         total: true
         labels: true
         nodes: true
+    - datetime:
+        text_size: 4x1
+        format:
+          timeStyle: short
+          dateStyle: long
+          hour12: true
   docker.yaml: ""
