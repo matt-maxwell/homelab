@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Distributed block storage system
-    gethomepage.dev/group: Cluster Management.Storage
+    gethomepage.dev/group: Storage
     gethomepage.dev/icon: longhorn.png
     gethomepage.dev/name: Longhorn
     gethomepage.dev/pod-selector: ""
