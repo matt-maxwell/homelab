@@ -6,6 +6,10 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Longhorn Storage
+    gethomepage.dev/group: Storage
+    gethomepage.dev/icon: longhorn.png
 spec:
   rules:
     - host: longhorn.k8s.local.guatalupe.com
