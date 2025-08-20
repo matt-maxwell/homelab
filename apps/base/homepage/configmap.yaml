@@ -30,7 +30,7 @@ data:
             description: Pihole DNS
             widgets:
               - type: pihole
-                url: http://192.168.1.160
+                url: https://192.168.1.160
                 version: 6
                 key: ${PIHOLE_API_KEY}
 
