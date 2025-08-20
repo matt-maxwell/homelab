@@ -25,7 +25,7 @@
     {
       "fileMatch": [".*\\.yaml$"],
       "matchStrings": [
-        "\\s*image:\\s*(?<depName>[\\w./:-]+):(?<currentValue>[^\\s]+)"
+        "\\s*image:\\s*[\"']?(?<depName>[a-zA-Z0-9._/-]+):(?<currentValue>[^\\s\"']+)[\"']?"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{depName}}",
