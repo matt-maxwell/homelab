@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Monitoring Dashboards
-    gethomepage.dev/group: Monitoring
+    gethomepage.dev/group: Cluster Management
     gethomepage.dev/icon: grafana.png 
     gethomepage.dev/name: Grafana
     gethomepage.dev/pod-selector: ""
@@ -38,7 +38,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Prometheus Web UI
-    gethomepage.dev/group: Monitoring
+    gethomepage.dev/group: Cluster Management
     gethomepage.dev/icon: prometheus.png 
     gethomepage.dev/name: Prometheus
     gethomepage.dev/pod-selector: ""
