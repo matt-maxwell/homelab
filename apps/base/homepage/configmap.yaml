@@ -30,7 +30,7 @@ data:
             description: Pihole DNS
             widgets:
               - type: pihole
-                url: https://192.168.1.160
+                url: https://pihole.local.guatalupe.com
                 version: 6
                 key: {{HOMEPAGE_VAR_PIHOLE_API_KEY}}
 
