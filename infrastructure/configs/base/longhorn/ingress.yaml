@@ -10,6 +10,7 @@ metadata:
     gethomepage.dev/description: Longhorn Storage
     gethomepage.dev/group: Storage
     gethomepage.dev/icon: longhorn.png
+    gethomepage.dev/name: Longhorn
     gethomepage.dev/pod-selector: ""
 spec:
   rules:
