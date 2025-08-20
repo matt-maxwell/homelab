@@ -4,6 +4,7 @@ namespace: homepage
 resources:
   - namespace.yaml
   - secret.yaml
+  - externalsecret.yaml
   - serviceaccount.yaml
   - service.yaml
   - ingress.yaml

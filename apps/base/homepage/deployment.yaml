@@ -29,6 +29,11 @@ spec:
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: homepage.k8s.local.guatalupe.com
+            - name: PIHOLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: pihole-api-key
+                  name: homepage-secrets
           ports:
             - name: http
               containerPort: 3000

@@ -23,10 +23,16 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
+    - DNS:
+        - Pihole:
+            href: https://pihole.local.guatalupe.com/admin
+            icon: pihole.png
+            description: Pihole DNS
+            widgets:
+              - type: pihole
+                url: https://pihole.local.guatalupe.com
+                version: 6
+                key: ${PIHOLE_API_KEY}
 
     - My Second Group:
         - My Second Service:
