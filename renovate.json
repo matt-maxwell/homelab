@@ -21,6 +21,17 @@
       "(^|/)values-.*\\.yaml$"
     ]
   },
+  "regexManagers": [
+    {
+      "fileMatch": [".*\\.yaml$"],
+      "matchStrings": [
+        "image:\\s*(?<depName>[\\w./-]+):(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "{{depName}}",
+      "versioningTemplate": "docker"
+    }
+  ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dependency Dashboard"
 }
