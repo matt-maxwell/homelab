@@ -16,6 +16,7 @@ data:
         url: http://longhorn-frontend.longhorn-system.svc.cluster.local
     title: Homelab
     description: Homepage for homelab services
+    statusStyle: "dot"
     headerStyle: boxedWidgets
     background: 
       image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
