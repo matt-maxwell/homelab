@@ -25,16 +25,15 @@ data:
       brightness: 50
       opacity: 50
     layout:
-      Cluster Management:
+      Cluster Dashboards:
         style: row
-        columns: 4
 
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
     - Developer:
         - Github:
-            - icon: sh-github.png
+            - icon: sh-github-light.png
               href: https://github.com/
     - Social:
         - Reddit:
