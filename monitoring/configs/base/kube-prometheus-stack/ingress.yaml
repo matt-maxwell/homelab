@@ -6,6 +6,12 @@ metadata:
   namespace: monitoring
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Monitoring Dashboards
+    gethomepage.dev/group: Monitoring
+    gethomepage.dev/icon: grafana.png 
+    gethomepage.dev/name: Grafana
+    gethomepage.dev/pod-select: ""
 spec:
   rules:
     - host: grafana.k8s.local.guatalupe.com
@@ -30,6 +36,12 @@ metadata:
   namespace: monitoring
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Prometheus Web UI
+    gethomepage.dev/group: Monitoring
+    gethomepage.dev/icon: prometheus.png 
+    gethomepage.dev/name: Prometheus
+    gethomepage.dev/pod-select: ""
 spec:
   rules:
     - host: prometheus.k8s.local.guatalupe.com
@@ -45,5 +57,5 @@ spec:
   tls:
     - hosts:
         - prometheus.k8s.local.guatalupe.com
-      secretName: grafana-web-ui-tls
+      secretName: prometheus-web-ui-tls
 
