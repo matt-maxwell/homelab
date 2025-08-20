@@ -41,6 +41,7 @@ data:
             href: https://pihole.local.guatalupe.com/admin
             icon: sh-pi-hole.png
             description: Pihole DNS
+            siteMonitor: http://hermes.guatalupe.com
             widgets:
               - type: pihole
                 url: https://pihole.local.guatalupe.com
@@ -52,6 +53,7 @@ data:
             href: https://plex.local.guatalupe.com
             icon: sh-plex.png
             description: Plex media server
+            siteMonitor: http://hades.guatalupe.com:32400
             widgets:
               - type: plex
                 url: https://plex.local.guatalupe.com
