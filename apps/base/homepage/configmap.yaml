@@ -10,7 +10,6 @@ data:
     mode: cluster
     ingress: true
     traefik: true
-  settings.yaml: ""
   settings.yaml: |
     providers:
       longhorn:
