@@ -14,6 +14,8 @@ metadata:
     gethomepage.dev/pod-selector: ""
     gethomepage.dev/widget.type: grafana
     gethomepage.dev/widget.url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+    gethomepage.dev/widget.username: {{HOMEPAGE_VAR_GRAFANA_ADMIN_USER}}
+    gethomepage.dev/widget.password: {{HOMEPAGE_VAR_GRAFANA_ADMIN_PASSWORD}}
 spec:
   rules:
     - host: grafana.k8s.local.guatalupe.com

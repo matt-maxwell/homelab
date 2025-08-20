@@ -29,8 +29,6 @@ spec:
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: homepage.k8s.local.guatalupe.com
-            - name: LOG_LEVEL
-              value: debug
             - name: HOMEPAGE_VAR_PIHOLE_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -40,6 +38,16 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: plex-device-token
+                  name: homepage-secrets
+            - name: HOMEPAGE_VAR_GRAFANA_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  key: grafana-admin-user
+                  name: homepage-secrets
+            - name: HOMEPAGE_VAR_GRAFANA_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: grafana-admin-password
                   name: homepage-secrets
           ports:
             - name: http
