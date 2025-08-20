@@ -38,7 +38,7 @@ data:
             href: https://plex.local.guatalupe.com
             icon: sh-plex.png
             description: Plex media server
-            widget:
+            widgets:
               - type: plex
                 url: https://plex.local.guatalupe.com
                 key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
