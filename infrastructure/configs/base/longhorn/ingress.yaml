@@ -10,7 +10,7 @@ metadata:
     gethomepage.dev/description: Longhorn Storage
     gethomepage.dev/group: Storage
     gethomepage.dev/icon: longhorn.png
-    gethomepage.dev/app: longhorn-ui
+    gethomepage.dev/pod-selector: ""
 spec:
   rules:
     - host: longhorn.k8s.local.guatalupe.com
