@@ -11,7 +11,7 @@ metadata:
     gethomepage.dev/group: Monitoring
     gethomepage.dev/icon: grafana.png 
     gethomepage.dev/name: Grafana
-    gethomepage.dev/pod-select: ""
+    gethomepage.dev/pod-selector: ""
 spec:
   rules:
     - host: grafana.k8s.local.guatalupe.com
@@ -41,7 +41,7 @@ metadata:
     gethomepage.dev/group: Monitoring
     gethomepage.dev/icon: prometheus.png 
     gethomepage.dev/name: Prometheus
-    gethomepage.dev/pod-select: ""
+    gethomepage.dev/pod-selector: ""
 spec:
   rules:
     - host: prometheus.k8s.local.guatalupe.com
