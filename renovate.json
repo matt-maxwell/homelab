@@ -6,32 +6,21 @@
     "helm-values"
   ],
   "kubernetes": {
-    "managerFilePatterns": [
-      ".*\\.yaml$"
+    "fileMatch": [
+      "\\.ya?ml$"
     ]
   },
   "flux": {
     "fileMatch": [
-      ".*\\.yaml$"
+      "\\.ya?ml$"
     ]
   },
   "helm-values": {
     "fileMatch": [
-      "(^|/)values\\.yaml$",
-      "(^|/)values-.*\\.yaml$"
+      "(^|/)values\\.ya?ml$",
+      "(^|/)values-.*\\.ya?ml$"
     ]
   },
-  "regexManagers": [
-    {
-      "fileMatch": [".*\\.yaml$"],
-      "matchStrings": [
-        "\\s*image:\\s*[\"']?(?<depName>[a-zA-Z0-9._/-]+):(?<currentValue>[^\\s\"']+)[\"']?"
-      ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "{{depName}}",
-      "versioningTemplate": "docker"
-    }
-  ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dependency Dashboard"
 }
