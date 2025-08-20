@@ -23,6 +23,22 @@ spec:
       service:
         selector:
           k8s-app: kube-scheduler
+    kubeEtcd:
+      enabled: true
+      service:
+        enabled: true
+        port: 2381
+        targetPort: 2381
+      serviceMonitor:
+        enabled: true
+        scheme: http
+        interval: 5m
+        scrapeTimeout: 10s
+        honorLabels: true
+        metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: 'etcd_(server_has_leader|server_leader_changes_seen_total|disk_backend_commit_duration_seconds|network_peer_round_trip_time_seconds|server_proposals_failed_total|server_proposals_pending|server_proposals_committed_total)'
+          action: keep
 
     alertmanager:
       enabled: false
