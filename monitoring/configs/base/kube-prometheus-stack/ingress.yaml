@@ -43,7 +43,7 @@ metadata:
     gethomepage.dev/name: Prometheus
     gethomepage.dev/pod-selector: ""
     gethomepage.dev/widget.type: prometheus
-    gethomepage.dev/widget.url: https://prometheus.k8s.local.guatalupe.com
+    gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
 spec:
   rules:
     - host: prometheus.k8s.local.guatalupe.com
