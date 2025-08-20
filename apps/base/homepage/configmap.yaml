@@ -42,7 +42,7 @@ data:
             href: https://pihole.local.guatalupe.com/admin
             icon: sh-pi-hole.png
             description: Pihole DNS
-            siteMonitor: http://hermes.guatalupe.com/api/auth
+            siteMonitor: http://hermes.guatalupe.com/admin
             widgets:
               - type: pihole
                 url: https://pihole.local.guatalupe.com
