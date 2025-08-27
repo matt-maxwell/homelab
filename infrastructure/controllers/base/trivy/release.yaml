@@ -13,8 +13,8 @@ spec:
         kind: HelmRepository
         name: aqua
         namespace: flux-system
-values:
-  trivy:
-    ignoreUnfixed: true
-  operator:
-    configAuditScannerEnabled: false
+  values:
+    trivy:
+      ignoreUnfixed: true
+    operator:
+      configAuditScannerEnabled: false
