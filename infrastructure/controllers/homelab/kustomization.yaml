@@ -7,4 +7,4 @@ resources:
   - renovate
   - longhorn
   - metrics
-#  - trivy
+  - trivy
