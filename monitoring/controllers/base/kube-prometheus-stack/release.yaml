@@ -83,7 +83,7 @@ spec:
         enabled: true
         type: pvc
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         size: 5Gi
   driftDetection:
     mode: enabled
