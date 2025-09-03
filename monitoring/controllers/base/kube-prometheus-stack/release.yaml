@@ -5,7 +5,16 @@ metadata:
   namespace: monitoring
 spec:
   interval: 30m
-  timeout: 10m
+  install:
+    timeout: 10m
+    crds: Create
+    remediation:
+      retries: 3
+  upgrade:
+    timeout: 10m
+    crds: CreateReplace
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -76,13 +85,6 @@ spec:
         accessModes:
           - ReadWriteOnce
         size: 5Gi
-
-
-
-  install:
-    crds: Create
-  upgrade:
-    crds: CreateReplace
   driftDetection:
     mode: enabled
     ignore:
