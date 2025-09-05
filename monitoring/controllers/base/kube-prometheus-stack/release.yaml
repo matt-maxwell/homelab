@@ -85,6 +85,8 @@ spec:
         accessModes:
           - ReadWriteMany
         size: 5Gi
+        storageClassName: longhorn
+  
   driftDetection:
     mode: enabled
     ignore:
